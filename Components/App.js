@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   Text,
+  Image,
 
 } from 'react-native';
 
@@ -15,41 +16,12 @@ export default class App extends Component {
         <View style={styles.roundButton} >
           <Text style={{ alignSelf: 'center', color: '#fff' }} > App Logo </Text>
         </View>
-
-        <Login />
+        <Image style={styles.facebookButton} source={require('./fb-sign-in-button.png')} />
       </View>
     );
   }
 }
 
-
-const FBSDK = require('react-native-fbsdk');
-const {
-  LoginButton,
-} = FBSDK;
-
-var Login = React.createClass({
-  render: function () {
-    return (
-      <View>
-        <LoginButton
-          publishPermissions={["public_profile, user_friends, email"]}
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                alert("Login failed with error: " + result.error);
-              } else if (result.isCancelled) {
-                alert("Login was cancelled");
-              } else {
-                alert("Login was successful with permissions: " + result.grantedPermissions)
-              }
-            }
-          }
-          onLogoutFinished={() => alert("User logged out")} />
-      </View>
-    );
-  }
-});
 
 const styles = StyleSheet.create({
   roundButton: {
@@ -64,6 +36,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   facebookButton: {
+    height: 50,
+    width: 200,
+    alignSelf: 'center',
+    marginTop: 20,
+    resizeMode: Image.resizeMode.contain,
 
   },
 });
